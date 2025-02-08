@@ -6,8 +6,8 @@ MASS_OF_EARTH = 5.972 * 10**24  # Mass of the Earth in kilograms
 RADIUS_OF_EARTH = 6.731 * 10**6  # Radius of then Earth in meters
 GRAVITATIONAL_ACCELERATION = 9.81  # This is in m/s**2
 
-h = float(input("What is the height of your rocket in metres: "))
-m = float(input("What is the mass of your rocket in kilograms: "))
+rocket_height = float(input("What is the height of your rocket in metres: "))
+initial_rocket_mass = float(input("What is the mass of your rocket in kilograms: "))
 
 # The Gravitation formulae is : Gravitational_force(Fg) = (GRAVTITATIONAL_CONSTANT * mass_of_rocket * MASS_OF_EARTH) / (RADIUS_OF_EARTH + height_of_rocket)^2
 
@@ -19,7 +19,9 @@ final_answer = num_answer / den_answer
 print(f"The gravitational force acting on the rocket is: {final_answer}N")
 """
 
-final_answer = (GRAVITATIONAL_CONSTANT * m * MASS_OF_EARTH) / (RADIUS_OF_EARTH + h) ** 2
+final_answer = (GRAVITATIONAL_CONSTANT * initial_rocket_mass * MASS_OF_EARTH) / (
+    RADIUS_OF_EARTH + rocket_height
+) ** 2
 print(f"The gravitational force acting on the rocket is:{final_answer}N")
 
 print(
@@ -154,7 +156,7 @@ if rocket_fuel_type == 1:
 elif rocket_fuel_type == 2:
     liquid_fuel_type = int(
         input(
-            "What is your liquid fuel type from the list below:\n1.Liquid hydrogen(LH2)\n2.Liquid Oxygen\n3.Hydrogen-Peroxide\n4.Petroleum-fuel\n5.Liquid-Methane\n6.Liquid-BioLPG"
+            "What is your liquid fuel type from the list below:\n1.Liquid hydrogen(LH2)\n2.Liquid Oxygen\n3.Hydrogen-Peroxide\n4.Petroleum-fuel\n5.Liquid-Methane\n6.Liquid-BioLPG\n"
         )
     )
     if liquid_fuel_type == 1:
@@ -263,7 +265,7 @@ elif rocket_fuel_type == 2:
 elif rocket_fuel_type == 3:
     space_engine_rocket_type = int(
         input(
-            "What is your Space-Engine rocket type from the list below:\n1.Liquid Hydrogen\n2.Rocket-Grade-Kerosene(RP-1)\n3.Liquid Oxygen\n4.Methane\n5.Hydrazine"
+            "What is your Space-Engine rocket type from the list below:\n1.Liquid Hydrogen\n2.Rocket-Grade-Kerosene(RP-1)\n3.Liquid Oxygen\n4.Methane\n5.Hydrazine\n"
         )
     )
 
@@ -347,3 +349,29 @@ elif rocket_fuel_type == 3:
         print(f"Your exhaust velocity is {hydrazine_exhaust_velocity}s")
         thrust_force = hydrazine_exhaust_velocity * hydrazine_mfr
         print(f"Your approximate thrust is {thrust_force}Newtons")
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        import math
+
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = hydrazine_exhaust_velocity * math.log(change_in_mass)
+        print(f"Your change in velocity is {change_in_velocity}")
+
+print(
+    "---------------------------------------------------------------------------------------------------"
+)
+
+# Rocket / Tsiolkovsky equation
+# It can be used to measure the change in velocity of a rocket in motion during fuel consumption
+# Change in velocity = Exhaust_velocity * ln(Initial_mass / Final_mass)
+# The mass of the fuel can be idenfied directly or calculated using density of propellant * surface area of propellant * length or height
+
+
+# Centripetal force/Orbital motion
+# This is the force that prevents the I.C.B.M from following a degrading orbit
+# The general formulae is Centripetal-force(Fc) = (Mass of rocket(kg) * Speed of object in orbit^2 (m/s)) / Radius of circular path(m)
+# The radius of the circular path = Radius of the earth + altitude of the rocket
+# orbital_velocity  =
+# centripetal_force = m *
