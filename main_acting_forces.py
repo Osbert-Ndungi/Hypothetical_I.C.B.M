@@ -1,10 +1,17 @@
 # GRAVITATIONAL FORCE FORMULAE
 # Using Newton's Law of Gravitation formulae
 # Main constants
+import math
+
 GRAVITATIONAL_CONSTANT = 6.67430 * 10**-11
 MASS_OF_EARTH = 5.972 * 10**24  # Mass of the Earth in kilograms
 RADIUS_OF_EARTH = 6.731 * 10**6  # Radius of then Earth in meters
 GRAVITATIONAL_ACCELERATION = 9.81  # This is in m/s**2
+SEA_LEVEL_AIR_DENSITY = 1.224  # This is an approximate in kg/m3
+SEA_LEVEL_STD_TEMP = 288.15  # This is in Kelvin
+TEMP_LAPSE_RATE = 0.0065  # This is in Kelvin per meter(K/m)
+MOLAR_MASS_EARTH_AIR = 0.028965  # This is in kilogram/mol (kg/mol)
+GAS_CONSTANT = 8.314  # This is in Joules per mol per Kelvin
 
 rocket_height = float(input("What is the height of your rocket in metres: "))
 initial_rocket_mass = float(input("What is the mass of your rocket in kilograms: "))
@@ -35,6 +42,14 @@ print(
 # Mass flow rate can be calculated multiplying the density of the propellant with the surface area of the propellant and its average burn rate
 # specific impulse (Isp) this is the thrust per unit weight flow rate of propellant in seconds
 # Exhaust velocity can be found using two different formulas for ease I used the simple formula of exhaust velocity =  specific impulse (in seconds) * gravitational acceleartion(in m/s**2)
+
+
+# Rocket / Tsiolkovsky equation
+# It can be used to measure the change in velocity of a rocket in motion during fuel consumption
+# Change in velocity = Exhaust_velocity * ln(Initial_mass / Final_mass)
+# The mass of the fuel can be idenfied directly or calculated using density of propellant * surface area of propellant * length or height
+
+
 average_burning_surface_area = float(
     input(
         "What is your average burning surface area in square meters-This is the area of the cylinder that contains the propellant\n"
@@ -75,6 +90,15 @@ if rocket_fuel_type == 1:
         print(f"Your exhaust velocity is {ammonium_perchlorate_exhaust_velocity}s")
         thrust_force = ammonium_perchlorate_mfr * ammonium_perchlorate_exhaust_velocity
         print(f"Your approximate thrust is {thrust_force}Newtons")
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = ammonium_perchlorate_exhaust_velocity * math.log(
+            change_in_mass
+        )
+        print(f"Your change in velocity is {change_in_velocity}")
 
     elif solid_fuel_type == 2:
         potassium_perchlorate_burn_rate = (
@@ -100,6 +124,15 @@ if rocket_fuel_type == 1:
             potassium_perchlorate_mfr * potassium_perchlorate_exhaust_velocity
         )
         print(f"Your approximate thrust is {thrust_force}Newtons")
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = potassium_perchlorate_exhaust_velocity * math.log(
+            change_in_mass
+        )
+        print(f"Your change in velocity is {change_in_velocity}")
 
     elif solid_fuel_type == 3:
         zinc_sulfur_burn_rate = 0.3  # This is an average of between 0.1 to 0.5 m/s
@@ -115,6 +148,13 @@ if rocket_fuel_type == 1:
             zinc_sulfur_mfr * zinc_sulfur_exhaust_velocity
         )  # This is your approx thrust in Newtons
         print(f"Your approximate thrust is {thrust_force}Newtons")
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = zinc_sulfur_exhaust_velocity * math.log(change_in_mass)
+        print(f"Your change in velocity is {change_in_velocity}")
 
     elif solid_fuel_type == 4:
         composite_burn_rate = 1.35  # This is an average of between 0.2 to 2.5 m/s
@@ -138,6 +178,13 @@ if rocket_fuel_type == 1:
         print(f"Your exhaust velocity is {double_base_exhaust_velocity}s")
         thrust_force = double_base_mfr * double_base_exhaust_velocity
         print(f"Your approximate thrust is {thrust_force}Newtons")
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = double_base_exhaust_velocity * math.log(change_in_mass)
+        print(f"Your change in velocity is {change_in_velocity}")
 
     elif solid_fuel_type == 6:
         black_powder_burn_rate = 0.35  # This is an average of between 0.1 to 0.6 m/s
@@ -151,6 +198,13 @@ if rocket_fuel_type == 1:
         print(f"Your exhaust velocity is {black_powder_exhaust_velocity}s")
         thrust_force = black_powder_mfr * black_powder_exhaust_velocity
         print(f"Your thrust is {thrust_force}Newtons")
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = black_powder_exhaust_velocity * math.log(change_in_mass)
+        print(f"Your change in velocity is {change_in_velocity}")
 
 
 elif rocket_fuel_type == 2:
@@ -175,6 +229,13 @@ elif rocket_fuel_type == 2:
         print(f"Your exhaust velocity is {liquid_hydrogen_exhaust_velocity}s")
         thrust_force = liquid_hydrogen_exhaust_velocity * liquid_hydrogen_mfr
         print(f"Your approximate thrust is {thrust_force}Newtons")
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = liquid_hydrogen_exhaust_velocity * math.log(change_in_mass)
+        print(f"Your change in velocity is {change_in_velocity}")
 
     elif liquid_fuel_type == 2:
         liquid_oxygen_burn_rate = 30  # Heavily depends on different factors like the type of fuel its mixed with , pressure and the combustion chamber design but it falls between the range of 10m/s to 50m/s
@@ -190,6 +251,13 @@ elif rocket_fuel_type == 2:
         print(f"Your exhaust velocity is {liquid_oxygen_exhaust_velocity}s")
         thrust_force = liquid_oxygen_mfr * liquid_oxygen_exhaust_velocity
         print(f"Your approximate thrust is {thrust_force}Newtons")
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = liquid_oxygen_exhaust_velocity * math.log(change_in_mass)
+        print(f"Your change in velocity is {change_in_velocity}")
 
     elif liquid_fuel_type == 3:
         hydrogen_peroxide_burn_rate = (
@@ -209,6 +277,15 @@ elif rocket_fuel_type == 2:
         print(f"Your exhaust velocity is {hydrogen_peroxide_exhaust_velocity}s")
         thrust_force = hydrogen_peroxide_exhaust_velocity * hydrogen_peroxide_mfr
         print(f"Your approximate thrust is {thrust_force}Newtons")
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = hydrogen_peroxide_exhaust_velocity * math.log(
+            change_in_mass
+        )
+        print(f"Your change in velocity is {change_in_velocity}")
 
     elif liquid_fuel_type == 4:
         petroleum_fuel_burn_rate = 0.7  # This is an average of between 0.4 to 1.0 m/s
@@ -226,6 +303,13 @@ elif rocket_fuel_type == 2:
         print(f"Your exhaust velocity is {petroleum_fuel_exhaust_velocity}s")
         thrust_force = petroleum_fuel_exhaust_velocity * petroleum_fuel_mfr
         print(f"Your approximate thrus is {thrust_force}Newtons")
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = petroleum_fuel_exhaust_velocity * math.log(change_in_mass)
+        print(f"Your change in velocity is {change_in_velocity}")
 
     elif liquid_fuel_type == 5:
         liquid_methane_burn_rate = 2.6  # This is an average of between 2.2 to 3.0m/s
@@ -243,6 +327,13 @@ elif rocket_fuel_type == 2:
         print(f"Your exhaust velocity is {liquid_methane_exhaust_velocity}s")
         thrust_force = liquid_methane_exhaust_velocity * liquid_methane_mfr
         print(f"Your approximate thrust is {thrust_force}Newtons")
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = liquid_methane_exhaust_velocity * math.log(change_in_mass)
+        print(f"Your change in velocity is {change_in_velocity}")
 
     elif liquid_fuel_type == 6:
         liquid_Bio_LPG_burn_rate = 0.6  # This is an average of between 0.4 to 0.8 m/s
@@ -260,6 +351,13 @@ elif rocket_fuel_type == 2:
         print(f"Your exhaust velocity is {liquid_Bio_LPG_exhaust_velocity}s")
         thrust_force = liquid_Bio_LPG_exhaust_velocity * liquid_Bio_LPG_mfr
         print(f"Your approximate thrust is {thrust_force}Newtons")
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = liquid_Bio_LPG_exhaust_velocity * math.log(change_in_mass)
+        print(f"Your change in velocity is {change_in_velocity}")
 
 
 elif rocket_fuel_type == 3:
@@ -285,6 +383,13 @@ elif rocket_fuel_type == 3:
         print(f"Your exhaust velocity is {liquid_hydrogen_exhaust_velocity}s")
         thrust_force = liquid_hydrogen_exhaust_velocity * liquid_hydrogen_mfr
         print(f"Your approximate thrust is {thrust_force}Newtons")
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = liquid_hydrogen_exhaust_velocity * math.log(change_in_mass)
+        print(f"Your change in velocity is {change_in_velocity}")
 
     elif space_engine_rocket_type == 2:
         rocket_grade_kerosene_burn_rate = (
@@ -310,7 +415,15 @@ elif rocket_fuel_type == 3:
             rocket_grade_kerosene_exhaust_velocity * rocket_grade_kerosene_mfr
         )
         print(f"Your approximate thrust is {thrust_force}Newtons")
-
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = rocket_grade_kerosene_exhaust_velocity * math.log(
+            change_in_mass
+        )
+        print(f"Your change in velocity is {change_in_velocity}")
     elif space_engine_rocket_type == 3:
         liquid_oxygen_burn_rate = 30  # Heavily depends on different factors like the type of fuel its mixed with , pressure and the combustion chamber design but it falls between the range of 10m/s to 50m/s
         liquid_oxygen_density = 1141  # This is in kg/m3
@@ -325,6 +438,13 @@ elif rocket_fuel_type == 3:
         print(f"Your exhaust velocity is {liquid_oxygen_exhaust_velocity}s")
         thrust_force = liquid_oxygen_exhaust_velocity * liquid_oxygen_mfr
         print(f"Your approximate thrust is {thrust_force}Newtons")
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = liquid_oxygen_exhaust_velocity * math.log(change_in_mass)
+        print(f"Your change in velocity is {change_in_velocity}")
 
     elif space_engine_rocket_type == 4:
         methane_burn_rate = 2.6  # This is an average of between 2.2 to 3.0 m/s
@@ -336,6 +456,13 @@ elif rocket_fuel_type == 3:
         print(f"Your exhaust velocity is {methane_exhaust_velocity}s")
         thrust_force = methane_exhaust_velocity * methane_mfr
         print(f"Your approximate thrust is {thrust_force}Newtons")
+        mass_of_propellant = float(
+            input("What is the mass of your fuel/propellant in kilograms?\n")
+        )
+        final_rocket_mass = initial_rocket_mass - mass_of_propellant
+        change_in_mass = initial_rocket_mass / final_rocket_mass
+        change_in_velocity = methane_exhaust_velocity * math.log(change_in_mass)
+        print(f"Your change in velocity is {change_in_velocity}")
 
     elif space_engine_rocket_type == 5:
         hydrazine_burn_rate = 0.4  # This is an average of between 0.2 to 0.6m/s
@@ -352,26 +479,57 @@ elif rocket_fuel_type == 3:
         mass_of_propellant = float(
             input("What is the mass of your fuel/propellant in kilograms?\n")
         )
-        import math
-
         final_rocket_mass = initial_rocket_mass - mass_of_propellant
         change_in_mass = initial_rocket_mass / final_rocket_mass
         change_in_velocity = hydrazine_exhaust_velocity * math.log(change_in_mass)
         print(f"Your change in velocity is {change_in_velocity}")
+        # For the drag equation i asked the user to input their ground and wind velocity but this can be found using inertial navigation systems and pitot static tubes respectively
+        rocket_altitude = float(
+            input("What is the altitude of your rocket in meters ?\n")
+        )
+        ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
+        wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
+        wind_direction = int(
+            input(
+                "Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"
+            )
+        )
+        if wind_direction == 1:
+            air_relative_velocity = ground_velocity + wind_velocity
+            print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+        if wind_direction == 2:
+            air_relative_velocity = ground_velocity - wind_velocity
+            print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            # The drag coefficient of your rocket can be deteermined before hand by running various tests like wind tunnel testing , CFD , flight testing and empirical estimation
+            # It is usually between 0.1 to 1.5
+            drag_coefficient = int(input("What is your drag coefficient ?\n"))
+            # The formulae for drag is Drag = 0.5 * drag_coefficient * air_density * cross_sec_area * air_relative_-velocity^2
+
+            inner_den = SEA_LEVEL_STD_TEMP + (
+                TEMP_LAPSE_RATE * rocket_altitude
+            )  # This is the denominator inside the brackets of the air density formulae
+            inner_full = (
+                SEA_LEVEL_STD_TEMP / inner_den
+            )  # This is everything inside the bracket of the air density formulae
+            outer_power = (GRAVITATIONAL_ACCELERATION * MOLAR_MASS_EARTH_AIR) / (
+                GAS_CONSTANT * TEMP_LAPSE_RATE
+            )  # This is everything in the power form for the air density formulae
+            inner_power = (
+                inner_full * outer_power
+            )  # This is when everything in the bracket is multiplied by the the full power in the air density formulae
+            air_density = SEA_LEVEL_AIR_DENSITY * inner_power
+            print(f"The air density is {air_density}kg/m3")
+
 
 print(
     "---------------------------------------------------------------------------------------------------"
 )
-
-# Rocket / Tsiolkovsky equation
-# It can be used to measure the change in velocity of a rocket in motion during fuel consumption
-# Change in velocity = Exhaust_velocity * ln(Initial_mass / Final_mass)
-# The mass of the fuel can be idenfied directly or calculated using density of propellant * surface area of propellant * length or height
-
 
 # Centripetal force/Orbital motion
 # This is the force that prevents the I.C.B.M from following a degrading orbit
 # The general formulae is Centripetal-force(Fc) = (Mass of rocket(kg) * Speed of object in orbit^2 (m/s)) / Radius of circular path(m)
 # The radius of the circular path = Radius of the earth + altitude of the rocket
 # orbital_velocity  =
-# centripetal_force = m *
+# centripetal_force = initial_rocket_mass
+
+# After all the forces have been calculated we need to find the NetForce which will be used to find the changing co-ordinates
