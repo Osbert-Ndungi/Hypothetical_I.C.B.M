@@ -15,16 +15,11 @@ GAS_CONSTANT = 8.314 #This is in Joules per mol per Kelvin
 
 rocket_height = float(input("What is the height of your rocket in metres: "))
 initial_rocket_mass = float(input("What is the mass of your rocket in kilograms: "))
-
+#rocket_latitude = float(input("What are the latitude co-ordinates of your launch site in DMS(degrees , minutes , seconds)"))
+# rocket_latitude_direction = float(input("What is the direction of your longitude:\n1.North\n2.South)"))
+# rocket_longitude = float(input("What are the longitude co-ordinates of your launch site in DMS(degrees , minutes , seconds)"))
+# rocket_longitude_direction = float(input("What is the direction of your longitude:\n1.North\n2.South"))
 # The Gravitation formulae is : Gravitational_force(Fg) = (GRAVTITATIONAL_CONSTANT * mass_of_rocket * MASS_OF_EARTH) / (RADIUS_OF_EARTH + height_of_rocket)^2
-
-"""
-num_answer = GRAVITATIONAL_CONSTANT * m * MASS_OF_EARTH
-den_answer = (RADIUS_OF_EARTH + h)**2
-
-final_answer = num_answer / den_answer
-print(f"The gravitational force acting on the rocket is: {final_answer}N")
-"""
 
 final_answer = (GRAVITATIONAL_CONSTANT * initial_rocket_mass * MASS_OF_EARTH) / (RADIUS_OF_EARTH + rocket_height) ** 2
 print(f"The gravitational force acting on the rocket is:{final_answer}N")
@@ -91,12 +86,16 @@ if rocket_fuel_type == 1:
         change_in_velocity = ammonium_perchlorate_exhaust_velocity * math.log(change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (air_relative_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
+            #To find the centripetal force = (Mass of the rocket (kg) * air_relative velocity ** 2 ) / radius of the earth + height of rocket
         elif wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
@@ -114,6 +113,8 @@ if rocket_fuel_type == 1:
             rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"{centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
@@ -149,12 +150,15 @@ if rocket_fuel_type == 1:
         change_in_velocity = potassium_perchlorate_exhaust_velocity * math.log(change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (air_relative_velocity **2)) / (rocket_altitude + rocket_height + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
         elif wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
@@ -169,9 +173,11 @@ if rocket_fuel_type == 1:
             inner_power = inner_full * outer_power #This is when everything in the bracket is multiplied by the the full power in the air density formulae
             air_density = SEA_LEVEL_AIR_DENSITY * inner_power
             print(f"The air density is {air_density}kg/m3")
-            rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
+            rocket_cross_sectional_area = float(input("What is the cross-*sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_altitude + rocket_height + RADIUS_OF_EARTH)
+            print(f"{centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
@@ -201,12 +207,15 @@ if rocket_fuel_type == 1:
         change_in_velocity = zinc_sulfur_exhaust_velocity * math.log(change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
         elif wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
@@ -224,6 +233,8 @@ if rocket_fuel_type == 1:
             rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_altitude + rocket_height + RADIUS_OF_EARTH)
+            print(f"{centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
@@ -265,12 +276,15 @@ if rocket_fuel_type == 1:
         change_in_velocity = double_base_exhaust_velocity * math.log(change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (air_relative_velocity **2)) / (rocket_altitude + rocket_height + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
         elif wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
@@ -288,6 +302,8 @@ if rocket_fuel_type == 1:
             rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / ( rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"{centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
@@ -317,12 +333,15 @@ if rocket_fuel_type == 1:
         change_in_velocity = black_powder_exhaust_velocity * math.log(change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (air_relative_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
         elif wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
@@ -340,6 +359,8 @@ if rocket_fuel_type == 1:
             rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"{centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
@@ -378,12 +399,15 @@ elif rocket_fuel_type == 2:
         change_in_velocity = liquid_hydrogen_exhaust_velocity * math.log(change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (air_relative_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
         elif wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
@@ -401,6 +425,8 @@ elif rocket_fuel_type == 2:
             rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"{centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
@@ -432,12 +458,15 @@ elif rocket_fuel_type == 2:
         change_in_velocity = liquid_oxygen_exhaust_velocity * math.log(change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (air_relative_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
         elif wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
@@ -455,6 +484,8 @@ elif rocket_fuel_type == 2:
             rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
@@ -488,12 +519,15 @@ elif rocket_fuel_type == 2:
         change_in_velocity = hydrogen_peroxide_exhaust_velocity * math.log(change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (air_relative_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
         elif wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
@@ -511,6 +545,8 @@ elif rocket_fuel_type == 2:
             rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_altitude + rocket_height + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
@@ -542,12 +578,15 @@ elif rocket_fuel_type == 2:
         change_in_velocity = petroleum_fuel_exhaust_velocity * math.log(change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (air_relative_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
         elif wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
@@ -565,6 +604,8 @@ elif rocket_fuel_type == 2:
             rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
@@ -596,12 +637,15 @@ elif rocket_fuel_type == 2:
         change_in_velocity = liquid_methane_exhaust_velocity * math.log(change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (air_relative_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
         elif wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
@@ -619,6 +663,8 @@ elif rocket_fuel_type == 2:
             rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
@@ -650,12 +696,15 @@ elif rocket_fuel_type == 2:
         change_in_velocity = liquid_Bio_LPG_exhaust_velocity * math.log(change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (air_relative_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
         elif wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
@@ -673,6 +722,8 @@ elif rocket_fuel_type == 2:
             rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
@@ -712,12 +763,15 @@ elif rocket_fuel_type == 3:
         change_in_velocity = liquid_hydrogen_exhaust_velocity * math.log(change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (air_relative_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
         elif wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
@@ -735,6 +789,8 @@ elif rocket_fuel_type == 3:
             rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
@@ -770,12 +826,15 @@ elif rocket_fuel_type == 3:
         change_in_velocity = rocket_grade_kerosene_exhaust_velocity * math.log(change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (air_relative_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
         if wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
@@ -793,6 +852,8 @@ elif rocket_fuel_type == 3:
             rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
@@ -825,12 +886,15 @@ elif rocket_fuel_type == 3:
         change_in_velocity = liquid_oxygen_exhaust_velocity * math.log(change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (air_relative_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
         elif wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
@@ -848,6 +912,8 @@ elif rocket_fuel_type == 3:
             rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
@@ -876,12 +942,15 @@ elif rocket_fuel_type == 3:
         change_in_velocity = methane_exhaust_velocity * math.log(change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (air_relative_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
         elif wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
@@ -899,6 +968,8 @@ elif rocket_fuel_type == 3:
             rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
@@ -927,20 +998,23 @@ elif rocket_fuel_type == 3:
         mass_of_propellant = (float(input("What is the mass of your fuel/propellant in kilograms?\n")))
         final_rocket_mass = initial_rocket_mass - mass_of_propellant  
         change_in_mass = initial_rocket_mass / final_rocket_mass
-        change_in_velocity = hydrazine_exhaust_velocity * math.log(change_in_mass) 
+        change_in_velocity = hydrazine_exhaust_velocity * math.log (change_in_mass) 
         print(f"Your change in velocity is {change_in_velocity}")
         #For the drag equation i asked the user to input their ground and wind velocity but this can be found using inertial navigation systems and pitot static tubes respectively
         rocket_altitude = float(input("What is the altitude of your rocket in meters ?\n"))
+        #For this equation i asked the user to input their altitude but this can be done using an altimeter
         ground_velocity = float(input("What is your ground velocity in m/s ?\n"))
         wind_velocity = float(input("What is your wind velocity in m/s ?\n"))
         wind_direction = int(input("Is your rocket flying ;\n1.Against the wind(Opposite to the rocket)\n2.In the same direction"))
         if wind_direction == 1:
             air_relative_velocity = ground_velocity + wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
+            centripetal_force = (initial_rocket_mass * (air_relative_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
         elif wind_direction == 2:
             air_relative_velocity = ground_velocity - wind_velocity
             print(f"Your Actual air relative velocity is {air_relative_velocity}m/s")
-            #The drag coefficient of your rocket can be deteermined before hand by running various tests like wind tunnel testing , CFD , flight testing and empirical estimation
+            #The drag coefficient of your rocket can be determined before hand by running various tests like wind tunnel testing , CFD , flight testing and empirical estimation
             #It is usually between 0.1 to 1.5
             drag_coefficient = int(input("What is your drag coefficient ?\n"))
             #The formulae for drag is Drag = 0.5 * drag_coefficient * air_density * cross_sec_area * air_relative_-velocity^2
@@ -954,6 +1028,8 @@ elif rocket_fuel_type == 3:
             rocket_cross_sectional_area = float(input("What is the cross-sectional area of your rocket in meters-squared ?\n"))
             drag_force = 0.5 * drag_coefficient * air_density * rocket_cross_sectional_area * (air_relative_velocity ** 2)
             print(f"Your approximate drag is {drag_force}Newtons")
+            centripetal_force = (initial_rocket_mass * (ground_velocity **2)) / (rocket_height + rocket_altitude + RADIUS_OF_EARTH)
+            print(f"Your centripetal force is {centripetal_force}Newtons")
             rocket_fins = int(input("Does your rocket have aerodynamic fins ?\n1.Yes\n2.No\n"))
             
             if rocket_fins == 1:
